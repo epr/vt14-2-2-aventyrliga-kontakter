@@ -38,7 +38,7 @@ namespace Kontakter
                 }
                 catch
                 {
-                    ModelState.AddModelError(String.Empty, "Ett oväntat fel instäffade då kontakten skulle läggas till.");
+                    ModelState.AddModelError(String.Empty, "Ett oväntat fel instäffade när kontakten skulle läggas till.");
                 }
             }
         }
@@ -50,7 +50,7 @@ namespace Kontakter
                 if (contact == null)
                 {
                     // Hittade inte kontakten
-                    ModelState.AddModelError(String.Empty, String.Format("Item with id {0} was not found", contactId));
+                    ModelState.AddModelError(String.Empty, "Kontakten hittades inte.");
                     return;
                 }
                 if (TryUpdateModel(contact))
@@ -62,7 +62,7 @@ namespace Kontakter
             }
             catch
             {
-                ModelState.AddModelError(String.Empty, "Ett oväntat fel instäffade då kontakten skulle uppdateras.");
+                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade när kontakten skulle uppdateras.");
             }
         }
         public void ContactsList_DeleteItem(int contactId)
@@ -75,7 +75,7 @@ namespace Kontakter
             }
             catch
             {
-                ModelState.AddModelError(String.Empty, "Ett oväntat fel instäffade då kontakten skulle tas bort.");
+                ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade när kontakten skulle tas bort.");
             }
         }
 
