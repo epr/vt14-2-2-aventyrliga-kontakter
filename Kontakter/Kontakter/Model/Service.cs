@@ -24,5 +24,9 @@ namespace Kontakter.Model
         {
             return ContactDAL.GetContacts();
         }
+        public IEnumerable<Contact> GetContactsPageWise(int maximumRows, int startRowIndex, out int totalRowCount)
+        {
+            return ContactDAL.GetContactsPageWise(maximumRows, startRowIndex, out totalRowCount);
+        }
     }
 }

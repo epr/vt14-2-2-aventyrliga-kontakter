@@ -29,9 +29,9 @@ namespace Kontakter
         //     int startRowIndex
         //     out int totalRowCount
         //     string sortByExpression
-        public IEnumerable<Contact> ContactsList_GetData()
+        public IEnumerable<Contact> ContactsList_GetData(int maximumRows, int startRowIndex, out int totalRowCount)
         {
-            return Service.GetContacts();
+            return Service.GetContactsPageWise(maximumRows, startRowIndex, out totalRowCount);
         }
 
         public void ContactsList_InsertItem()

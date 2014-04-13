@@ -12,7 +12,7 @@
                 SelectMethod="ContactsList_GetData" 
                 InsertMethod="ContactsList_InsertItem" 
                 UpdateMethod="ContactsList_UpdateItem" 
-                DeleteMethod="ContactsList_DeleteItem">
+                DeleteMethod="ContactsList_DeleteItem" DataKeyNames="ContactID">
                 <LayoutTemplate>
                     <table>
                         <thead>
@@ -22,6 +22,13 @@
                         </thead>
                         <asp:PlaceHolder ID="itemPlaceHolder" runat="server"></asp:PlaceHolder>
                     </table>
+                    <asp:DataPager ID="ContactsPager" runat="server" PagedControlID="ContactsList" PageSize="20">
+                        <Fields>
+                            <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="true" ShowNextPageButton="false" ShowLastPageButton="false" />
+                            <asp:NumericPagerField />
+                            <asp:NextPreviousPagerField ButtonType="Button" ShowLastPageButton="true" ShowPreviousPageButton="false" />
+                        </Fields>
+                    </asp:DataPager>
                 </LayoutTemplate>
                 <ItemTemplate>
                     <tr>
