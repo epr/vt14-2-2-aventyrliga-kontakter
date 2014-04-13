@@ -11,24 +11,24 @@ namespace Kontakter.Model.DAL
     {
         public static IEnumerable<Contact> GetContacts()
         {
-            using (var conn = CreateConnection())
+            using (var conn = CreateConnection()) // skapa uppkoppling
             {
                 try
                 {
-                    var contacts = new List<Contact>(100);
-                    var cmd = new SqlCommand("Person.uspGetContacts", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    conn.Open();
-                    using (var reader = cmd.ExecuteReader())
-                    {
+                    var contacts = new List<Contact>(100); // skapa lista för kontakter
+                    var cmd = new SqlCommand("Person.uspGetContacts", conn); // nytt kommando
+                    cmd.CommandType = CommandType.StoredProcedure; // av typen lagrad procedur
+                    conn.Open(); // öppna uppkopplingen
+                    using (var reader = cmd.ExecuteReader()) // läs från kontakterna som returneras
+                    { // hämta index
                         var contactIdIndex = reader.GetOrdinal("ContactID");
                         var emailAddressIndex = reader.GetOrdinal("EmailAddress");
                         var firstNameIndex = reader.GetOrdinal("FirstName");
                         var lastNameIndex = reader.GetOrdinal("LastName");
-                        while (reader.Read())
+                        while (reader.Read()) // så länge det finns rader att läsa
                         {
-                            contacts.Add(new Contact
-                            {
+                            contacts.Add(new Contact // skapa ny kontakt och lägg till den i listan
+                            { // hämta kontaktegenskaper med hjälp av index
                                 ContactId = reader.GetInt32(contactIdIndex),
                                 EmailAddress = reader.GetString(emailAddressIndex),
                                 FirstName = reader.GetString(firstNameIndex),
@@ -36,8 +36,8 @@ namespace Kontakter.Model.DAL
                             });
                         }
                     }
-                    contacts.TrimExcess();
-                    return contacts;
+                    contacts.TrimExcess(); // trimma listan
+                    return contacts; // returnera listan
                 }
                 catch
                 {
@@ -53,11 +53,11 @@ namespace Kontakter.Model.DAL
                 {
                     var cmd = new SqlCommand("Person.uspGetContact", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@ContactID", contactId);
+                    cmd.Parameters.AddWithValue("@ContactID", contactId); // lägg till parameter till den lagrade proceduren
                     conn.Open();
                     using (var reader = cmd.ExecuteReader())
                     {
-                        if (reader.Read())
+                        if (reader.Read()) // om det finns något att läsa
                         {
                             var contactIdIndex = reader.GetOrdinal("ContactID");
                             var emailAddressIndex = reader.GetOrdinal("EmailAddress");
@@ -91,10 +91,10 @@ namespace Kontakter.Model.DAL
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@PageIndex", startRowIndex / maximumRows + 1);
                     cmd.Parameters.AddWithValue("@PageSize", maximumRows);
-                    cmd.Parameters.Add("@RecordCount", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@RecordCount", SqlDbType.Int).Direction = ParameterDirection.Output; // lägg till output-parameter
                     conn.Open();
                     cmd.ExecuteNonQuery();
-                    totalRowCount = (int)cmd.Parameters["@RecordCount"].Value;
+                    totalRowCount = (int)cmd.Parameters["@RecordCount"].Value; // sätt output-värdet
                     using (var reader = cmd.ExecuteReader())
                     {
                         var contactIdIndex = reader.GetOrdinal("ContactID");

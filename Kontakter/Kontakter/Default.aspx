@@ -10,6 +10,7 @@
     <h1>Äventyrliga kontakter</h1>
     <form id="ContactsForm" runat="server">
         <div>
+            <%-- Fel- och rättmeddelanden --%>
             <asp:ValidationSummary ID="ValidationSummary" runat="server" HeaderText="Fel inträffade. Korrigera det som är fel och försök igen." />
             <asp:PlaceHolder ID="SuccessMessageHolder" runat="server" Visible="false">
                 <div id="MessageBox">
@@ -17,8 +18,11 @@
                     <button ID="CloseMessage">✖</button>
                 </div>
             </asp:PlaceHolder>
+            <%-- Visa rad för ny post --%>
             <asp:Button ID="ShowInsertRow" runat="server" Text="Ny kontakt" OnClick="ShowInsertRow_Click" />
-            <asp:ListView ID="ContactsList" runat="server" ItemType="Kontakter.Model.Contact" SelectMethod="ContactsList_GetData" InsertMethod="ContactsList_InsertItem" UpdateMethod="ContactsList_UpdateItem" DeleteMethod="ContactsList_DeleteItem" DataKeyNames="ContactID" InsertItemPosition="LastItem">
+            <%-- Kontaktlista --%>
+            <asp:ListView ID="ContactsList" runat="server" ItemType="Kontakter.Model.Contact" SelectMethod="ContactsList_GetData" InsertMethod="ContactsList_InsertItem" 
+                UpdateMethod="ContactsList_UpdateItem" DeleteMethod="ContactsList_DeleteItem" DataKeyNames="ContactID" InsertItemPosition="LastItem">
                 <LayoutTemplate>
                     <table>
                         <thead>
@@ -37,6 +41,7 @@
                         </Fields>
                     </asp:DataPager>
                 </LayoutTemplate>
+                <%-- Kontakttemplate --%>
                 <ItemTemplate>
                     <tr>
                         <td>
@@ -54,6 +59,7 @@
                         </td>
                     </tr>
                 </ItemTemplate>
+                <%-- Infoga ny kontakt --%>
                 <InsertItemTemplate>
                     <tr>
                         <td>
@@ -75,6 +81,7 @@
                         </td>
                     </tr>
                 </InsertItemTemplate>
+                <%-- Redigera kontakt --%>
                 <EditItemTemplate>
                     <tr>
                         <td>
@@ -96,6 +103,7 @@
                         </td>
                     </tr>
                 </EditItemTemplate>
+                <%-- Visas om det inte finns några kontakter --%>
                 <EmptyDataTemplate>
                     <p>Det finns inga kontakter.</p>
                 </EmptyDataTemplate>

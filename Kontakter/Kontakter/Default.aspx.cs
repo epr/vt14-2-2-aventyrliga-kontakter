@@ -20,11 +20,11 @@ namespace Kontakter
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            ContactsList.InsertItemPosition = InsertItemPosition.None;
+            ContactsList.InsertItemPosition = InsertItemPosition.None; // gömmer raden för ny kontakt
         }
         public IEnumerable<Contact> ContactsList_GetData(int maximumRows, int startRowIndex, out int totalRowCount)
         {
-            return Service.GetContactsPageWise(maximumRows, startRowIndex, out totalRowCount);
+            return Service.GetContactsPageWise(maximumRows, startRowIndex, out totalRowCount); // hämta kontaktsida
         }
         public void ContactsList_InsertItem(Contact contact)
         {
@@ -32,13 +32,13 @@ namespace Kontakter
             {
                 try
                 {
-                    Service.SaveContact(contact);
-                    SuccessMessageHolder.Visible = true;
+                    Service.SaveContact(contact); // spara kontakt
+                    SuccessMessageHolder.Visible = true; // visa rättmeddelande
                     SuccessMessage.Text = "Kontaktuppgiften har lagts till.";
                 }
                 catch
                 {
-                    ModelState.AddModelError(String.Empty, "Ett oväntat fel instäffade när kontakten skulle läggas till.");
+                    ModelState.AddModelError(String.Empty, "Ett oväntat fel instäffade när kontakten skulle läggas till."); // visa felmeddelande
                 }
             }
         }
@@ -46,16 +46,15 @@ namespace Kontakter
         {
             try
             {
-                var contact = Service.GetContact(contactId);
-                if (contact == null)
+                var contact = Service.GetContact(contactId); // hämta kontakten
+                if (contact == null) // hittade inte kontakten
                 {
-                    // Hittade inte kontakten
                     ModelState.AddModelError(String.Empty, "Kontakten hittades inte.");
                     return;
                 }
                 if (TryUpdateModel(contact))
                 {
-                    Service.SaveContact(contact);
+                    Service.SaveContact(contact); // spara kontakt
                     SuccessMessageHolder.Visible = true;
                     SuccessMessage.Text = "Kontaktuppgiften har uppdaterats.";
                 }
@@ -69,7 +68,7 @@ namespace Kontakter
         {
             try
             {
-                Service.DeleteContact(contactId);
+                Service.DeleteContact(contactId); // ta bort kontakt
                 SuccessMessageHolder.Visible = true;
                 SuccessMessage.Text = "Kontaktuppgiften har tagits bort.";
             }
@@ -81,8 +80,8 @@ namespace Kontakter
 
         protected void ShowInsertRow_Click(object sender, EventArgs e)
         {
-            ContactsList.InsertItemPosition = InsertItemPosition.LastItem;
-            ShowInsertRow.Enabled = false;
+            ContactsList.InsertItemPosition = InsertItemPosition.LastItem; // visa rad för ny kontakt
+            ShowInsertRow.Enabled = false; // stäng av knappen för att visa raden för ny kontakt
         }
     }
 }

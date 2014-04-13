@@ -15,7 +15,7 @@ namespace Kontakter.Model.DAL
             return new SqlConnection(_connectionString);
         }
         static DALBase()
-        {
+        { // skapa ny uppkopplingssträng
             _connectionString = WebConfigurationManager.ConnectionStrings["1dv406_AdventureWorksAssignmentConnectionString"].ConnectionString;
         }
     }

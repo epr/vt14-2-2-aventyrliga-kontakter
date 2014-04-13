@@ -30,11 +30,11 @@ namespace Kontakter.Model
         }
         public void SaveContact(Contact contact)
         {
-            if (contact.ContactId == 0)
+            if (contact.ContactId == 0) // om kontakten inte finns ska den infogas
             {
                 ContactDAL.InsertContact(contact);
             }
-            else
+            else // annars ska den uppdateras
             {
                 ContactDAL.UpdateContact(contact);
             }
