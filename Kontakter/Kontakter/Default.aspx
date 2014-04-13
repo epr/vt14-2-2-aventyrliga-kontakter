@@ -100,5 +100,6 @@
             </asp:ListView>
         </div>
     </form>
+    <script src="Scripts/kontakter.js"></script>
 </body>
 </html>
