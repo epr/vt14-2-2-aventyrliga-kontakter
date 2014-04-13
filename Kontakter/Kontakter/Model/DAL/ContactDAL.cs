@@ -161,5 +161,26 @@ namespace Kontakter.Model.DAL
                 }
             }
         }
+        public static void UpdateContact(Contact contact)
+        {
+            using (var conn = CreateConnection())
+            {
+                try
+                {
+                    var cmd = new SqlCommand("Person.uspUpdateContact", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ContactID", contact.ContactId);
+                    cmd.Parameters.AddWithValue("@FirstName", contact.FirstName);
+                    cmd.Parameters.AddWithValue("@LastName", contact.LastName);
+                    cmd.Parameters.AddWithValue("@EmailAddress", contact.EmailAddress);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    throw new ApplicationException("Fel uppstod vid uppkoppling till databasen");
+                }
+            }
+        }
     }
 }

@@ -34,6 +34,10 @@ namespace Kontakter.Model
             {
                 ContactDAL.InsertContact(contact);
             }
+            else
+            {
+                ContactDAL.UpdateContact(contact);
+            }
         }
         public void DeleteContact(int contactId)
         {

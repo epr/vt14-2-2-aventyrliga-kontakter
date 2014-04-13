@@ -40,21 +40,26 @@ namespace Kontakter
                 }
             }
         }
-        public void ContactsList_UpdateItem(int id)
+        public void ContactsList_UpdateItem(int contactId)
         {
-            Kontakter.Model.Contact item = null;
-            // Load the item here, e.g. item = MyDataLayer.Find(id);
-            if (item == null)
+            try
             {
-                // The item wasn't found
-                ModelState.AddModelError("", String.Format("Item with id {0} was not found", id));
-                return;
+                var contact = Service.GetContact(contactId);
+                if (contact == null)
+                {
+                    // The item wasn't found
+                    ModelState.AddModelError("", String.Format("Item with id {0} was not found", contactId));
+                    return;
+                }
+                TryUpdateModel(contact);
+                if (ModelState.IsValid)
+                {
+                    Service.SaveContact(contact);
+                }
             }
-            TryUpdateModel(item);
-            if (ModelState.IsValid)
+            catch
             {
-                // Save changes here, e.g. MyDataLayer.SaveChanges();
-
+                //
             }
         }
         public void ContactsList_DeleteItem(int contactId)

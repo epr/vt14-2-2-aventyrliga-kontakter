@@ -43,6 +43,7 @@
                             <%#: Item.EmailAddress %>
                         </td>
                         <td>
+                            <asp:LinkButton ID="UpdateButton" runat="server" CommandName="Edit">Redigera</asp:LinkButton>
                             <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete">Ta bort</asp:LinkButton>
                         </td>
                     </tr>
@@ -64,6 +65,23 @@
                         </td>
                     </tr>
                 </InsertItemTemplate>
+                <EditItemTemplate>
+                    <tr>
+                        <td>
+                            <asp:TextBox ID="FirstNameEdit" runat="server" Text="<%#: BindItem.FirstName %>"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="LastNameEdit" runat="server" Text="<%#: BindItem.LastName %>"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="EmailEdit" runat="server" Text="<%#: BindItem.EmailAddress %>"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:LinkButton ID="InsertButton" runat="server" CommandName="Update">Spara</asp:LinkButton>
+                            <asp:LinkButton ID="CancelButton" runat="server" CommandName="Cancel">Avbryt</asp:LinkButton>
+                        </td>
+                    </tr>
+                </EditItemTemplate>
                 <EmptyDataTemplate>
                     <p>Det finns inga kontakter.</p>
                 </EmptyDataTemplate>
