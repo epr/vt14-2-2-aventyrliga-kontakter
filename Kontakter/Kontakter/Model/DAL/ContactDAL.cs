@@ -121,5 +121,45 @@ namespace Kontakter.Model.DAL
                 }
             }
         }
+        public static void InsertContact(Contact contact)
+        {
+            using (var conn = CreateConnection())
+            {
+                try
+                {
+                    var cmd = new SqlCommand("Person.uspAddContact", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@FirstName", contact.FirstName);
+                    cmd.Parameters.AddWithValue("@LastName", contact.LastName);
+                    cmd.Parameters.AddWithValue("@EmailAddress", contact.EmailAddress);
+                    cmd.Parameters.Add("@ContactID", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    contact.ContactId = (int)cmd.Parameters["@ContactID"].Value;
+                }
+                catch
+                {
+                    throw new ApplicationException("Fel uppstod vid uppkoppling till databasen");
+                }
+            }
+        }
+        public static void DeleteContact(int contactId)
+        {
+            using (var conn = CreateConnection())
+            {
+                try
+                {
+                    var cmd = new SqlCommand("Person.uspRemoveContact", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ContactID", contactId);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    throw new ApplicationException("Fel uppstod vid uppkoppling till databasen");
+                }
+            }
+        }
     }
 }

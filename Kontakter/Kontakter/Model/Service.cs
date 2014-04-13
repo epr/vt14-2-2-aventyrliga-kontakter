@@ -28,5 +28,16 @@ namespace Kontakter.Model
         {
             return ContactDAL.GetContactsPageWise(maximumRows, startRowIndex, out totalRowCount);
         }
+        public void SaveContact(Contact contact)
+        {
+            if (contact.ContactId == 0)
+            {
+                ContactDAL.InsertContact(contact);
+            }
+        }
+        public void DeleteContact(int contactId)
+        {
+            ContactDAL.DeleteContact(contactId);
+        }
     }
 }

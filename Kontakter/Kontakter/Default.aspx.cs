@@ -22,30 +22,24 @@ namespace Kontakter
         {
 
         }
-
-        // The return type can be changed to IEnumerable, however to support
-        // paging and sorting, the following parameters must be added:
-        //     int maximumRows
-        //     int startRowIndex
-        //     out int totalRowCount
-        //     string sortByExpression
         public IEnumerable<Contact> ContactsList_GetData(int maximumRows, int startRowIndex, out int totalRowCount)
         {
             return Service.GetContactsPageWise(maximumRows, startRowIndex, out totalRowCount);
         }
-
-        public void ContactsList_InsertItem()
+        public void ContactsList_InsertItem(Contact contact)
         {
-            var item = new Kontakter.Model.Contact();
-            TryUpdateModel(item);
             if (ModelState.IsValid)
             {
-                // Save changes here
-
+                try
+                {
+                    Service.SaveContact(contact);
+                }
+                catch
+                {
+                    //
+                }
             }
         }
-
-        // The id parameter name should match the DataKeyNames value set on the control
         public void ContactsList_UpdateItem(int id)
         {
             Kontakter.Model.Contact item = null;
@@ -63,11 +57,16 @@ namespace Kontakter
 
             }
         }
-
-        // The id parameter name should match the DataKeyNames value set on the control
-        public void ContactsList_DeleteItem(int id)
+        public void ContactsList_DeleteItem(int contactId)
         {
-
+            try
+            {
+                Service.DeleteContact(contactId);
+            }
+            catch
+            {
+                //
+            }
         }
     }
 }
