@@ -60,6 +60,9 @@
                 <%-- Infoga ny kontakt --%>
                 <InsertItemTemplate>
                     <tr>
+                        <th colspan="4">Lägg till en ny kontakt</th>
+                    </tr>
+                    <tr>
                         <td>
                             <asp:TextBox ID="FirstName" runat="server" Text="<%#: BindItem.FirstName %>" MaxLength="50"></asp:TextBox>
                             <asp:RequiredFieldValidator ValidationGroup="InsertValidation" ControlToValidate="FirstName" ID="RequiredFirstName" runat="server" ErrorMessage="Förnamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
