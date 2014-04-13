@@ -10,16 +10,16 @@ namespace Kontakter.Model
     {
         public int ContactId { get; set; }
 
-        [Required(ErrorMessage="E-postadress måste anges")]
+        [Required(ErrorMessage="E-postadress måste anges.")]
         [MaxLength(50)]
-        [RegularExpression(".+@.+..+", ErrorMessage="E-postadressen verkar inte vara korrekt")]
+        [RegularExpression(".+@.+..+", ErrorMessage="E-postadressen verkar inte vara korrekt.")]
         public string EmailAddress { get; set; }
 
-        [Required(ErrorMessage = "Förnamn måste anges")]
+        [Required(ErrorMessage = "Förnamn måste anges.")]
         [MaxLength(50)]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Efternamn måste anges")]
+        [Required(ErrorMessage = "Efternamn måste anges.")]
         [MaxLength(50)]
         public string LastName { get; set; }
     }

@@ -20,7 +20,10 @@ namespace Kontakter
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            ContactsList.InsertItemPosition = InsertItemPosition.None; // gömmer raden för ny kontakt
+        }
+        protected void Page_LoadComplete(object sender, EventArgs e)
+        {
+
         }
         public IEnumerable<Contact> ContactsList_GetData(int maximumRows, int startRowIndex, out int totalRowCount)
         {
@@ -80,12 +83,6 @@ namespace Kontakter
             {
                 ModelState.AddModelError(String.Empty, "Ett oväntat fel inträffade när kontakten skulle tas bort.");
             }
-        }
-
-        protected void ShowInsertRow_Click(object sender, EventArgs e)
-        {
-            ContactsList.InsertItemPosition = InsertItemPosition.LastItem; // visa rad för ny kontakt
-            ShowInsertRow.Enabled = false; // stäng av knappen för att visa raden för ny kontakt
         }
     }
 }

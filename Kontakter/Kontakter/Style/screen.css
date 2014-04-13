@@ -25,7 +25,7 @@ thead {
 table {
     border-collapse: collapse;
 }
-#ValidationSummary {
+.ValidationSummary {
     border: 2px solid red;
     background: #fcc;
     color: #900;

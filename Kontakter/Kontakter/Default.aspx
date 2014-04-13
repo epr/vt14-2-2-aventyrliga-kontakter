@@ -11,15 +11,14 @@
     <form id="ContactsForm" runat="server">
         <div>
             <%-- Fel- och rättmeddelanden --%>
-            <asp:ValidationSummary ID="ValidationSummary" runat="server" HeaderText="Fel inträffade. Korrigera det som är fel och försök igen." />
+            <asp:ValidationSummary ValidationGroup="InsertValidation" ShowModelStateErrors="false" ID="ValidationSummary1" CssClass="ValidationSummary" runat="server" HeaderText="Fel inträffade. Korrigera det som är fel och försök igen." />
+            <asp:ValidationSummary ValidationGroup="EditValidation" ID="ValidationSummary2" CssClass="ValidationSummary" runat="server" HeaderText="Fel inträffade. Korrigera det som är fel och försök igen." />
             <asp:PlaceHolder ID="SuccessMessageHolder" runat="server" Visible="false">
                 <div id="MessageBox">
-                    <asp:Label ID="SuccessMessage" runat="server" Text="hej"></asp:Label>
+                    <asp:Label ID="SuccessMessage" runat="server"></asp:Label>
                     <button ID="CloseMessage">✖</button>
                 </div>
             </asp:PlaceHolder>
-            <%-- Visa rad för ny post --%>
-            <asp:Button ID="ShowInsertRow" runat="server" Text="Ny kontakt" OnClick="ShowInsertRow_Click" />
             <%-- Kontaktlista --%>
             <asp:ListView ID="ContactsList" runat="server" ItemType="Kontakter.Model.Contact" SelectMethod="ContactsList_GetData" InsertMethod="ContactsList_InsertItem" UpdateMethod="ContactsList_UpdateItem" DeleteMethod="ContactsList_DeleteItem" DataKeyNames="ContactID" InsertItemPosition="LastItem">
                 <LayoutTemplate>
@@ -53,7 +52,7 @@
                             <%#: Item.EmailAddress %>
                         </td>
                         <td>
-                            <asp:LinkButton runat="server" CommandName="Edit">Redigera</asp:LinkButton>
+                            <asp:LinkButton runat="server" CommandName="Edit" CausesValidation="false">Redigera</asp:LinkButton>
                             <asp:LinkButton runat="server" CommandName="Delete" OnClientClick="if (!confirm('Ta bort kontakten permanent?')) return false;" CausesValidation="false">Ta bort</asp:LinkButton>
                         </td>
                     </tr>
@@ -63,19 +62,19 @@
                     <tr>
                         <td>
                             <asp:TextBox ID="FirstName" runat="server" Text="<%#: BindItem.FirstName %>" MaxLength="50"></asp:TextBox>
-                            <asp:RequiredFieldValidator ControlToValidate="FirstName" ID="RequiredFirstName" runat="server" ErrorMessage="Förnamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ValidationGroup="InsertValidation" ControlToValidate="FirstName" ID="RequiredFirstName" runat="server" ErrorMessage="Förnamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
                         </td>
                         <td>
                             <asp:TextBox ID="LastName" runat="server" Text="<%#: BindItem.LastName %>" MaxLength="50"></asp:TextBox>
-                            <asp:RequiredFieldValidator ControlToValidate="LastName" ID="RequiredLastName" runat="server" ErrorMessage="Efternamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ValidationGroup="InsertValidation" ControlToValidate="LastName" ID="RequiredLastName" runat="server" ErrorMessage="Efternamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
                         </td>
                         <td>
                             <asp:TextBox ID="EmailAddress" runat="server" Text="<%#: BindItem.EmailAddress %>" MaxLength="50"></asp:TextBox>
-                            <asp:RequiredFieldValidator ControlToValidate="EmailAddress" ID="RequiredEmailAddress" runat="server" ErrorMessage="E-post måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
-                            <asp:RegularExpressionValidator ControlToValidate="EmailAddress" ID="CorrectEmailAddress" runat="server" ErrorMessage="E-postadressen verkar inte vara korrekt." ValidationExpression=".+\@.+\..+" Display="None" SetFocusOnError="true"></asp:RegularExpressionValidator>
+                            <asp:RequiredFieldValidator ValidationGroup="InsertValidation" ControlToValidate="EmailAddress" ID="RequiredEmailAddress" runat="server" ErrorMessage="E-post måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ValidationGroup="InsertValidation" ControlToValidate="EmailAddress" ID="CorrectEmailAddress" runat="server" ErrorMessage="E-postadressen verkar inte vara korrekt." ValidationExpression=".+\@.+\..+" Display="None" SetFocusOnError="true"></asp:RegularExpressionValidator>
                         </td>
                         <td>
-                            <asp:LinkButton runat="server" CommandName="Insert">Spara</asp:LinkButton>
+                            <asp:LinkButton runat="server" CommandName="Insert" ValidationGroup="InsertValidation">Spara</asp:LinkButton>
                             <asp:LinkButton runat="server" CommandName="Cancel" CausesValidation="false">Avbryt</asp:LinkButton>
                         </td>
                     </tr>
@@ -85,19 +84,19 @@
                     <tr>
                         <td>
                             <asp:TextBox ID="FirstName" runat="server" Text="<%#: BindItem.FirstName %>" MaxLength="50"></asp:TextBox>
-                            <asp:RequiredFieldValidator ControlToValidate="FirstName" ID="RequiredFirstName" runat="server" ErrorMessage="Förnamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ValidationGroup="EditValidation" ControlToValidate="FirstName" ID="RequiredFirstName" runat="server" ErrorMessage="Förnamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
                         </td>
                         <td>
                             <asp:TextBox ID="LastName" runat="server" Text="<%#: BindItem.LastName %>" MaxLength="50"></asp:TextBox>
-                            <asp:RequiredFieldValidator ControlToValidate="LastName" ID="RequiredLastName" runat="server" ErrorMessage="Efternamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                            <asp:RequiredFieldValidator ValidationGroup="EditValidation" ControlToValidate="LastName" ID="RequiredLastName" runat="server" ErrorMessage="Efternamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
                         </td>
                         <td>
                             <asp:TextBox ID="EmailAddress" runat="server" Text="<%#: BindItem.EmailAddress %>" MaxLength="50"></asp:TextBox>
-                            <asp:RequiredFieldValidator ControlToValidate="EmailAddress" ID="RequiredEmailAddress" runat="server" ErrorMessage="E-post måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
-                            <asp:RegularExpressionValidator ControlToValidate="EmailAddress" ID="CorrectEmailAddress" runat="server" ErrorMessage="E-postadressen verkar inte vara korrekt." ValidationExpression=".+\@.+\..+" Display="None" SetFocusOnError="true"></asp:RegularExpressionValidator>
+                            <asp:RequiredFieldValidator ValidationGroup="EditValidation" ControlToValidate="EmailAddress" ID="RequiredEmailAddress" runat="server" ErrorMessage="E-post måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ValidationGroup="EditValidation" ControlToValidate="EmailAddress" ID="CorrectEmailAddress" runat="server" ErrorMessage="E-postadressen verkar inte vara korrekt." ValidationExpression=".+\@.+\..+" Display="None" SetFocusOnError="true"></asp:RegularExpressionValidator>
                         </td>
                         <td>
-                            <asp:LinkButton runat="server" CommandName="Update">Spara</asp:LinkButton>
+                            <asp:LinkButton runat="server" CommandName="Update" ValidationGroup="EditValidation">Spara</asp:LinkButton>
                             <asp:LinkButton runat="server" CommandName="Cancel" CausesValidation="false">Avbryt</asp:LinkButton>
                         </td>
                     </tr>
