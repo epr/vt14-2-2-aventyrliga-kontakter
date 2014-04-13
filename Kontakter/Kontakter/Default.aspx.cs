@@ -58,6 +58,10 @@ namespace Kontakter
                     SuccessMessageHolder.Visible = true;
                     SuccessMessage.Text = "Kontaktuppgiften har uppdaterats.";
                 }
+                else
+                {
+                    throw new ApplicationException();
+                }
             }
             catch
             {

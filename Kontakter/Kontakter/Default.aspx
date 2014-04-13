@@ -21,8 +21,7 @@
             <%-- Visa rad för ny post --%>
             <asp:Button ID="ShowInsertRow" runat="server" Text="Ny kontakt" OnClick="ShowInsertRow_Click" />
             <%-- Kontaktlista --%>
-            <asp:ListView ID="ContactsList" runat="server" ItemType="Kontakter.Model.Contact" SelectMethod="ContactsList_GetData" InsertMethod="ContactsList_InsertItem" 
-                UpdateMethod="ContactsList_UpdateItem" DeleteMethod="ContactsList_DeleteItem" DataKeyNames="ContactID" InsertItemPosition="LastItem">
+            <asp:ListView ID="ContactsList" runat="server" ItemType="Kontakter.Model.Contact" SelectMethod="ContactsList_GetData" InsertMethod="ContactsList_InsertItem" UpdateMethod="ContactsList_UpdateItem" DeleteMethod="ContactsList_DeleteItem" DataKeyNames="ContactID" InsertItemPosition="LastItem">
                 <LayoutTemplate>
                     <table>
                         <thead>
