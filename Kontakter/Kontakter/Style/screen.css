@@ -9,14 +9,21 @@ table td input, table td + td input {
     width: 196px;
 }
 table td + td + td {
-    width: 250px;
+    width: 300px;
 }
 table td + td + td input {
-    width: 246px;
+    width: 296px;
 }
 table td + td + td + td {
     width: auto;
     background: white;
+}
+thead {
+    background: #333;
+    color: white;
+}
+table {
+    border-collapse: collapse;
 }
 #ValidationSummary {
     border: 2px solid red;

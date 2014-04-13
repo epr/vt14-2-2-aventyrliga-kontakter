@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="Style/screen.css">
 </head>
 <body>
+    <h1>Äventyrliga kontakter</h1>
     <form id="ContactsForm" runat="server">
         <div>
             <asp:ValidationSummary ID="ValidationSummary" runat="server" HeaderText="Fel inträffade. Korrigera det som är fel och försök igen." />
@@ -24,6 +25,7 @@
                             <th>Förnamn</th>
                             <th>Efternamn</th>
                             <th>E-post</th>
+                            <th>Redigera/Ta bort</th>
                         </thead>
                         <asp:PlaceHolder ID="itemPlaceHolder" runat="server"></asp:PlaceHolder>
                     </table>
