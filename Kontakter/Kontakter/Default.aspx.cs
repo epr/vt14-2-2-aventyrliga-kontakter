@@ -21,13 +21,6 @@ namespace Kontakter
         protected void Page_Load(object sender, EventArgs e)
         {
             ContactsList.InsertItemPosition = InsertItemPosition.None;
-            if (Session["Success"] as bool? == true)
-            {
-                SuccessMessageHolder.Visible = true;
-                SuccessMessage.Text = Session["Message"].ToString();
-                Session.Remove("Success");
-                Session.Remove("Message");
-            }
         }
         public IEnumerable<Contact> ContactsList_GetData(int maximumRows, int startRowIndex, out int totalRowCount)
         {
@@ -40,9 +33,8 @@ namespace Kontakter
                 try
                 {
                     Service.SaveContact(contact);
-                    Session["Success"] = true;
-                    Session["Message"] = "Kontaktuppgiften har lagts till.";
-                    Response.Redirect("~/Default.aspx");
+                    SuccessMessageHolder.Visible = true;
+                    SuccessMessage.Text = "Kontaktuppgiften har lagts till.";
                 }
                 catch
                 {
@@ -64,9 +56,8 @@ namespace Kontakter
                 if (TryUpdateModel(contact))
                 {
                     Service.SaveContact(contact);
-                    Session["Success"] = true;
-                    Session["Message"] = "Kontaktuppgiften har uppdaterats.";
-                    Response.Redirect("~/Default.aspx");
+                    SuccessMessageHolder.Visible = true;
+                    SuccessMessage.Text = "Kontaktuppgiften har uppdaterats.";
                 }
             }
             catch
@@ -79,9 +70,8 @@ namespace Kontakter
             try
             {
                 Service.DeleteContact(contactId);
-                Session["Success"] = true;
-                Session["Message"] = "Kontaktuppgiften har tagits bort.";
-                Response.Redirect("~/Default.aspx");
+                SuccessMessageHolder.Visible = true;
+                SuccessMessage.Text = "Kontaktuppgiften har tagits bort.";
             }
             catch
             {

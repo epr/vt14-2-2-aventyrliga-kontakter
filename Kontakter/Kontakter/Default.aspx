@@ -11,8 +11,9 @@
         <div>
             <asp:ValidationSummary ID="ValidationSummary" runat="server" HeaderText="Fel inträffade. Korrigera det som är fel och försök igen." />
             <asp:PlaceHolder ID="SuccessMessageHolder" runat="server" Visible="false">
-                <div>
+                <div id="MessageBox">
                     <asp:Label ID="SuccessMessage" runat="server" Text="hej"></asp:Label>
+                    <button ID="CloseMessage">✖</button>
                 </div>
             </asp:PlaceHolder>
             <asp:Button ID="ShowInsertRow" runat="server" Text="Ny kontakt" OnClick="ShowInsertRow_Click" />
@@ -47,7 +48,7 @@
                         </td>
                         <td>
                             <asp:LinkButton runat="server" CommandName="Edit">Redigera</asp:LinkButton>
-                            <asp:LinkButton runat="server" CommandName="Delete" OnClientClick="if (!confirm('Ta bort kontakten permanent?')) return false;">Ta bort</asp:LinkButton>
+                            <asp:LinkButton runat="server" CommandName="Delete" OnClientClick="if (!confirm('Ta bort kontakten permanent?')) return false;" CausesValidation="false">Ta bort</asp:LinkButton>
                         </td>
                     </tr>
                 </ItemTemplate>
