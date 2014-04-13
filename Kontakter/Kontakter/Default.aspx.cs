@@ -10,6 +10,14 @@ namespace Kontakter
 {
     public partial class Default : System.Web.UI.Page
     {
+        private Service _service;
+        private Service Service
+        {
+            get
+            {
+                return _service ?? (_service = new Service());
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -21,9 +29,9 @@ namespace Kontakter
         //     int startRowIndex
         //     out int totalRowCount
         //     string sortByExpression
-        public IQueryable<Contact> ContactsList_GetData()
+        public IEnumerable<Contact> ContactsList_GetData()
         {
-            return null;
+            return Service.GetContacts();
         }
 
         public void ContactsList_InsertItem()

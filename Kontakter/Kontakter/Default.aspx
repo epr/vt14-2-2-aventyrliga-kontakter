@@ -13,7 +13,29 @@
                 InsertMethod="ContactsList_InsertItem" 
                 UpdateMethod="ContactsList_UpdateItem" 
                 DeleteMethod="ContactsList_DeleteItem">
-
+                <LayoutTemplate>
+                    <table>
+                        <thead>
+                            <th>Förnamn</th>
+                            <th>Efternamn</th>
+                            <th>E-post</th>
+                        </thead>
+                        <asp:PlaceHolder ID="itemPlaceHolder" runat="server"></asp:PlaceHolder>
+                    </table>
+                </LayoutTemplate>
+                <ItemTemplate>
+                    <tr>
+                        <td>
+                            <%#: Item.FirstName %>
+                        </td>
+                        <td>
+                            <%#: Item.LastName %>
+                        </td>
+                        <td>
+                            <%#: Item.EmailAddress %>
+                        </td>
+                    </tr>
+                </ItemTemplate>
             </asp:ListView>
         </div>
     </form>
