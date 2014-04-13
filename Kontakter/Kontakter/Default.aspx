@@ -10,13 +10,13 @@
     <form id="ContactsForm" runat="server">
         <div>
             <asp:ValidationSummary ID="ValidationSummary" runat="server" HeaderText="Fel inträffade. Korrigera det som är fel och försök igen." />
+            <asp:PlaceHolder ID="SuccessMessageHolder" runat="server" Visible="false">
+                <div>
+                    <asp:Label ID="SuccessMessage" runat="server" Text="hej"></asp:Label>
+                </div>
+            </asp:PlaceHolder>
             <asp:Button ID="ShowInsertRow" runat="server" Text="Ny kontakt" OnClick="ShowInsertRow_Click" />
-            <asp:ListView ID="ContactsList" runat="server" ItemType="Kontakter.Model.Contact" 
-                SelectMethod="ContactsList_GetData" 
-                InsertMethod="ContactsList_InsertItem" 
-                UpdateMethod="ContactsList_UpdateItem" 
-                DeleteMethod="ContactsList_DeleteItem"
-                DataKeyNames="ContactID" InsertItemPosition="LastItem">
+            <asp:ListView ID="ContactsList" runat="server" ItemType="Kontakter.Model.Contact" SelectMethod="ContactsList_GetData" InsertMethod="ContactsList_InsertItem" UpdateMethod="ContactsList_UpdateItem" DeleteMethod="ContactsList_DeleteItem" DataKeyNames="ContactID" InsertItemPosition="LastItem">
                 <LayoutTemplate>
                     <table>
                         <thead>
@@ -47,7 +47,7 @@
                         </td>
                         <td>
                             <asp:LinkButton runat="server" CommandName="Edit">Redigera</asp:LinkButton>
-                            <asp:LinkButton runat="server" CommandName="Delete">Ta bort</asp:LinkButton>
+                            <asp:LinkButton runat="server" CommandName="Delete" OnClientClick="if (!confirm('Ta bort kontakten permanent?')) return false;">Ta bort</asp:LinkButton>
                         </td>
                     </tr>
                 </ItemTemplate>
@@ -64,6 +64,7 @@
                         <td>
                             <asp:TextBox ID="EmailAddress" runat="server" Text="<%#: BindItem.EmailAddress %>" MaxLength="50"></asp:TextBox>
                             <asp:RequiredFieldValidator ControlToValidate="EmailAddress" ID="RequiredEmailAddress" runat="server" ErrorMessage="E-post måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ControlToValidate="EmailAddress" ID="CorrectEmailAddress" runat="server" ErrorMessage="E-postadressen verkar inte vara korrekt." ValidationExpression=".+\@.+\..+" Display="None" SetFocusOnError="true"></asp:RegularExpressionValidator>
                         </td>
                         <td>
                             <asp:LinkButton runat="server" CommandName="Insert">Spara</asp:LinkButton>
@@ -84,6 +85,7 @@
                         <td>
                             <asp:TextBox ID="EmailAddress" runat="server" Text="<%#: BindItem.EmailAddress %>" MaxLength="50"></asp:TextBox>
                             <asp:RequiredFieldValidator ControlToValidate="EmailAddress" ID="RequiredEmailAddress" runat="server" ErrorMessage="E-post måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ControlToValidate="EmailAddress" ID="CorrectEmailAddress" runat="server" ErrorMessage="E-postadressen verkar inte vara korrekt." ValidationExpression=".+\@.+\..+" Display="None" SetFocusOnError="true"></asp:RegularExpressionValidator>
                         </td>
                         <td>
                             <asp:LinkButton runat="server" CommandName="Update">Spara</asp:LinkButton>

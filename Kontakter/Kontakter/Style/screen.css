@@ -18,3 +18,11 @@ table td + td + td + td {
     width: auto;
     background: white;
 }
+#ValidationSummary {
+    border: 2px solid red;
+    background: #fcc;
+    color: #900;
+    width: 400px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
