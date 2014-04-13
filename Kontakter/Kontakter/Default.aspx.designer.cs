@@ -22,6 +22,24 @@ namespace Kontakter {
         protected global::System.Web.UI.HtmlControls.HtmlForm ContactsForm;
         
         /// <summary>
+        /// ValidationSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary;
+        
+        /// <summary>
+        /// ShowInsertRow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ShowInsertRow;
+        
+        /// <summary>
         /// ContactsList control.
         /// </summary>
         /// <remarks>

@@ -4,16 +4,19 @@
 <html>
 <head runat="server">
     <title>Äventyrliga kontakter - Eddy Proca</title>
+    <link rel="stylesheet" href="Style/screen.css">
 </head>
 <body>
     <form id="ContactsForm" runat="server">
         <div>
+            <asp:ValidationSummary ID="ValidationSummary" runat="server" HeaderText="Fel inträffade. Korrigera det som är fel och försök igen." />
+            <asp:Button ID="ShowInsertRow" runat="server" Text="Ny kontakt" OnClick="ShowInsertRow_Click" />
             <asp:ListView ID="ContactsList" runat="server" ItemType="Kontakter.Model.Contact" 
                 SelectMethod="ContactsList_GetData" 
                 InsertMethod="ContactsList_InsertItem" 
                 UpdateMethod="ContactsList_UpdateItem" 
                 DeleteMethod="ContactsList_DeleteItem"
-                DataKeyNames="ContactID" InsertItemPosition="FirstItem">
+                DataKeyNames="ContactID" InsertItemPosition="LastItem">
                 <LayoutTemplate>
                     <table>
                         <thead>
@@ -26,7 +29,7 @@
                     <asp:DataPager ID="ContactsPager" runat="server" PagedControlID="ContactsList" PageSize="20">
                         <Fields>
                             <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="true" ShowPreviousPageButton="false" ShowNextPageButton="false" FirstPageText="Första" />
-                            <asp:NumericPagerField />
+                            <asp:NumericPagerField ButtonCount="30" />
                             <asp:NextPreviousPagerField ButtonType="Button" ShowLastPageButton="true" ShowPreviousPageButton="false" ShowNextPageButton="false" LastPageText="Sista" />
                         </Fields>
                     </asp:DataPager>
@@ -43,42 +46,48 @@
                             <%#: Item.EmailAddress %>
                         </td>
                         <td>
-                            <asp:LinkButton ID="UpdateButton" runat="server" CommandName="Edit">Redigera</asp:LinkButton>
-                            <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete">Ta bort</asp:LinkButton>
+                            <asp:LinkButton runat="server" CommandName="Edit">Redigera</asp:LinkButton>
+                            <asp:LinkButton runat="server" CommandName="Delete">Ta bort</asp:LinkButton>
                         </td>
                     </tr>
                 </ItemTemplate>
                 <InsertItemTemplate>
                     <tr>
                         <td>
-                            <asp:TextBox ID="FirstNameInput" runat="server" Text="<%#: BindItem.FirstName %>"></asp:TextBox>
+                            <asp:TextBox ID="FirstName" runat="server" Text="<%#: BindItem.FirstName %>" MaxLength="50"></asp:TextBox>
+                            <asp:RequiredFieldValidator ControlToValidate="FirstName" ID="RequiredFirstName" runat="server" ErrorMessage="Förnamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
                         </td>
                         <td>
-                            <asp:TextBox ID="LastNameInput" runat="server" Text="<%#: BindItem.LastName %>"></asp:TextBox>
+                            <asp:TextBox ID="LastName" runat="server" Text="<%#: BindItem.LastName %>" MaxLength="50"></asp:TextBox>
+                            <asp:RequiredFieldValidator ControlToValidate="LastName" ID="RequiredLastName" runat="server" ErrorMessage="Efternamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
                         </td>
                         <td>
-                            <asp:TextBox ID="EmailInput" runat="server" Text="<%#: BindItem.EmailAddress %>"></asp:TextBox>
+                            <asp:TextBox ID="EmailAddress" runat="server" Text="<%#: BindItem.EmailAddress %>" MaxLength="50"></asp:TextBox>
+                            <asp:RequiredFieldValidator ControlToValidate="EmailAddress" ID="RequiredEmailAddress" runat="server" ErrorMessage="E-post måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
                         </td>
                         <td>
-                            <asp:LinkButton ID="InsertButton" runat="server" CommandName="Insert">Spara</asp:LinkButton>
-                            <asp:LinkButton ID="CancelButton" runat="server" CommandName="Cancel">Avbryt</asp:LinkButton>
+                            <asp:LinkButton runat="server" CommandName="Insert">Spara</asp:LinkButton>
+                            <asp:LinkButton runat="server" CommandName="Cancel" CausesValidation="false">Avbryt</asp:LinkButton>
                         </td>
                     </tr>
                 </InsertItemTemplate>
                 <EditItemTemplate>
                     <tr>
                         <td>
-                            <asp:TextBox ID="FirstNameEdit" runat="server" Text="<%#: BindItem.FirstName %>"></asp:TextBox>
+                            <asp:TextBox ID="FirstName" runat="server" Text="<%#: BindItem.FirstName %>" MaxLength="50"></asp:TextBox>
+                            <asp:RequiredFieldValidator ControlToValidate="FirstName" ID="RequiredFirstName" runat="server" ErrorMessage="Förnamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
                         </td>
                         <td>
-                            <asp:TextBox ID="LastNameEdit" runat="server" Text="<%#: BindItem.LastName %>"></asp:TextBox>
+                            <asp:TextBox ID="LastName" runat="server" Text="<%#: BindItem.LastName %>" MaxLength="50"></asp:TextBox>
+                            <asp:RequiredFieldValidator ControlToValidate="LastName" ID="RequiredLastName" runat="server" ErrorMessage="Efternamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
                         </td>
                         <td>
-                            <asp:TextBox ID="EmailEdit" runat="server" Text="<%#: BindItem.EmailAddress %>"></asp:TextBox>
+                            <asp:TextBox ID="EmailAddress" runat="server" Text="<%#: BindItem.EmailAddress %>" MaxLength="50"></asp:TextBox>
+                            <asp:RequiredFieldValidator ControlToValidate="EmailAddress" ID="RequiredEmailAddress" runat="server" ErrorMessage="E-post måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
                         </td>
                         <td>
-                            <asp:LinkButton ID="InsertButton" runat="server" CommandName="Update">Spara</asp:LinkButton>
-                            <asp:LinkButton ID="CancelButton" runat="server" CommandName="Cancel">Avbryt</asp:LinkButton>
+                            <asp:LinkButton runat="server" CommandName="Update">Spara</asp:LinkButton>
+                            <asp:LinkButton runat="server" CommandName="Cancel" CausesValidation="false">Avbryt</asp:LinkButton>
                         </td>
                     </tr>
                 </EditItemTemplate>

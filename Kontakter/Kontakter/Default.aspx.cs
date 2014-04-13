@@ -20,7 +20,7 @@ namespace Kontakter
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            ContactsList.InsertItemPosition = InsertItemPosition.None;
         }
         public IEnumerable<Contact> ContactsList_GetData(int maximumRows, int startRowIndex, out int totalRowCount)
         {
@@ -36,7 +36,7 @@ namespace Kontakter
                 }
                 catch
                 {
-                    //
+                    ModelState.AddModelError(String.Empty, "Ett oväntat fel instäffade då kontakten skulle läggas till.");
                 }
             }
         }
@@ -47,19 +47,18 @@ namespace Kontakter
                 var contact = Service.GetContact(contactId);
                 if (contact == null)
                 {
-                    // The item wasn't found
-                    ModelState.AddModelError("", String.Format("Item with id {0} was not found", contactId));
+                    // Hittade inte kontakten
+                    ModelState.AddModelError(String.Empty, String.Format("Item with id {0} was not found", contactId));
                     return;
                 }
-                TryUpdateModel(contact);
-                if (ModelState.IsValid)
+                if (TryUpdateModel(contact))
                 {
                     Service.SaveContact(contact);
                 }
             }
             catch
             {
-                //
+                ModelState.AddModelError(String.Empty, "Ett oväntat fel instäffade då kontakten skulle uppdateras.");
             }
         }
         public void ContactsList_DeleteItem(int contactId)
@@ -70,8 +69,14 @@ namespace Kontakter
             }
             catch
             {
-                //
+                ModelState.AddModelError(String.Empty, "Ett oväntat fel instäffade då kontakten skulle tas bort.");
             }
+        }
+
+        protected void ShowInsertRow_Click(object sender, EventArgs e)
+        {
+            ContactsList.InsertItemPosition = InsertItemPosition.LastItem;
+            ShowInsertRow.Enabled = false;
         }
     }
 }
