@@ -8,7 +8,13 @@
 <body>
     <form id="ContactsForm" runat="server">
         <div>
-            
+            <asp:ListView ID="ContactsList" runat="server" ItemType="Kontakter.Model.Contact" 
+                SelectMethod="ContactsList_GetData" 
+                InsertMethod="ContactsList_InsertItem" 
+                UpdateMethod="ContactsList_UpdateItem" 
+                DeleteMethod="ContactsList_DeleteItem">
+
+            </asp:ListView>
         </div>
     </form>
 </body>
