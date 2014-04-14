@@ -64,15 +64,15 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:TextBox ID="FirstName" runat="server" Text="<%#: BindItem.FirstName %>" MaxLength="50"></asp:TextBox>
+                            <asp:TextBox ID="FirstName" runat="server" Text="<%#: BindItem.FirstName %>" MaxLength="50" placeholder="Förnamn"></asp:TextBox>
                             <asp:RequiredFieldValidator ValidationGroup="InsertValidation" ControlToValidate="FirstName" ID="RequiredFirstName" runat="server" ErrorMessage="Förnamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
                         </td>
                         <td>
-                            <asp:TextBox ID="LastName" runat="server" Text="<%#: BindItem.LastName %>" MaxLength="50"></asp:TextBox>
+                            <asp:TextBox ID="LastName" runat="server" Text="<%#: BindItem.LastName %>" MaxLength="50" placeholder="Efternamn"></asp:TextBox>
                             <asp:RequiredFieldValidator ValidationGroup="InsertValidation" ControlToValidate="LastName" ID="RequiredLastName" runat="server" ErrorMessage="Efternamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
                         </td>
                         <td>
-                            <asp:TextBox ID="EmailAddress" runat="server" Text="<%#: BindItem.EmailAddress %>" MaxLength="50"></asp:TextBox>
+                            <asp:TextBox ID="EmailAddress" runat="server" Text="<%#: BindItem.EmailAddress %>" MaxLength="50" placeholder="E-post"></asp:TextBox>
                             <asp:RequiredFieldValidator ValidationGroup="InsertValidation" ControlToValidate="EmailAddress" ID="RequiredEmailAddress" runat="server" ErrorMessage="E-post måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ValidationGroup="InsertValidation" ControlToValidate="EmailAddress" ID="CorrectEmailAddress" runat="server" ErrorMessage="E-postadressen verkar inte vara korrekt." ValidationExpression=".+\@.+\..+" Display="None" SetFocusOnError="true"></asp:RegularExpressionValidator>
                         </td>
@@ -86,15 +86,15 @@
                 <EditItemTemplate>
                     <tr>
                         <td>
-                            <asp:TextBox ID="FirstName" runat="server" Text="<%#: BindItem.FirstName %>" MaxLength="50"></asp:TextBox>
+                            <asp:TextBox ID="FirstName" runat="server" Text="<%#: BindItem.FirstName %>" MaxLength="50" placeholder="Förnamn"></asp:TextBox>
                             <asp:RequiredFieldValidator ValidationGroup="EditValidation" ControlToValidate="FirstName" ID="RequiredFirstName" runat="server" ErrorMessage="Förnamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
                         </td>
                         <td>
-                            <asp:TextBox ID="LastName" runat="server" Text="<%#: BindItem.LastName %>" MaxLength="50"></asp:TextBox>
+                            <asp:TextBox ID="LastName" runat="server" Text="<%#: BindItem.LastName %>" MaxLength="50" placeholder="Efternamn"></asp:TextBox>
                             <asp:RequiredFieldValidator ValidationGroup="EditValidation" ControlToValidate="LastName" ID="RequiredLastName" runat="server" ErrorMessage="Efternamn måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
                         </td>
                         <td>
-                            <asp:TextBox ID="EmailAddress" runat="server" Text="<%#: BindItem.EmailAddress %>" MaxLength="50"></asp:TextBox>
+                            <asp:TextBox ID="EmailAddress" runat="server" Text="<%#: BindItem.EmailAddress %>" MaxLength="50" placeholder="E-post"></asp:TextBox>
                             <asp:RequiredFieldValidator ValidationGroup="EditValidation" ControlToValidate="EmailAddress" ID="RequiredEmailAddress" runat="server" ErrorMessage="E-post måste anges" Text="*" Display="None" SetFocusOnError="True"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ValidationGroup="EditValidation" ControlToValidate="EmailAddress" ID="CorrectEmailAddress" runat="server" ErrorMessage="E-postadressen verkar inte vara korrekt." ValidationExpression=".+\@.+\..+" Display="None" SetFocusOnError="true"></asp:RegularExpressionValidator>
                         </td>
